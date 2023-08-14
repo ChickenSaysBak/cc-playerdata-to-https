@@ -19,7 +19,7 @@ public class LambdaFunction implements RequestHandler<Map<String, Object>, Map<S
     public Map<String, Object> handleRequest(Map<String, Object> input, Context context) {
 
         Map<String, Object> response = new HashMap<>();
-        String path = (String) input.get("rawPath");
+        String path = (String) input.getOrDefault("rawPath", "");
 
         if (!path.startsWith("/api/playerdata")) {
             response.put("statusCode", 400);
@@ -27,9 +27,12 @@ public class LambdaFunction implements RequestHandler<Map<String, Object>, Map<S
             return response;
         }
 
+        String queryString = (String) input.getOrDefault("rawQueryString", "");
+        String params = path + (!queryString.isEmpty() ? "?" + queryString : "");
+
         try {
 
-            URL url = new URL(ENDPOINT + path);
+            URL url = new URL(ENDPOINT + params);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
