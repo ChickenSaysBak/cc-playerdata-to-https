@@ -45,6 +45,7 @@ public class LambdaFunction implements RequestHandler<Map<String, Object>, Map<S
 
             response.put("statusCode", con.getResponseCode());
             response.put("body", content);
+            response.put("headers", Map.of("Access-Control-Allow-Origin", "*"));
             con.disconnect();
 
         } catch (IOException e) {
