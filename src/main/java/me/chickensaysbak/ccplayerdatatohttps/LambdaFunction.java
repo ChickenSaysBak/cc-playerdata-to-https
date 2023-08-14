@@ -21,6 +21,12 @@ public class LambdaFunction implements RequestHandler<Map<String, Object>, Map<S
         Map<String, Object> response = new HashMap<>();
         String path = (String) input.get("rawPath");
 
+        if (!path.startsWith("/api/playerdata")) {
+            response.put("statusCode", 400);
+            response.put("body", "Requests must come from the following base path: /api/playerdata");
+            return response;
+        }
+
         try {
 
             URL url = new URL(ENDPOINT + path);
