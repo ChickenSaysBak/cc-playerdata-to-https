@@ -1,4 +1,5 @@
 # cc-playerdata-to-https
+###### ⚠️ This endpoint is no longer online.
 Retrieve CozyCloud playerdata from an https endpoint:
 <br>https://fjbpf3sb3r4dpjauqwzebltr2y0gsqxa.lambda-url.us-east-2.on.aws
 
